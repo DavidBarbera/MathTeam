@@ -6,14 +6,12 @@
 //
 namespace octet {
   /// Scene containing a box with octet.
-  class TEST001 : public app {
+  class TEST002 : public app {
     // scene for drawing box
     ref<visual_scene> app_scene;
-	ref<material> myMaterial;
-
   public:
     /// this is called when we construct the class before everything is initialised.
-    TEST001(int argc, char **argv) : app(argc, argv) {
+    TEST002(int argc, char **argv) : app(argc, argv) {
     }
 
     /// this is called once OpenGL is initialized
@@ -21,17 +19,11 @@ namespace octet {
       app_scene =  new visual_scene();
       app_scene->create_default_camera_and_lights();
 
-//the MATERIAL
-	  param_shader *shader = new param_shader("shaders/default.vs", "shaders/default_solid.fs");
-      myMaterial = new material(vec4(1, 1, 1, 1),shader);
-
-//the SHAPE
+      material *red = new material(vec4(1, 0, 0, 1));
       mesh_box *box = new mesh_box(vec3(4));
-
-//the NODE 
-	  scene_node *node = new scene_node();
+      scene_node *node = new scene_node();
       app_scene->add_child(node);
-      app_scene->add_mesh_instance(new mesh_instance(node, box, myMaterial));
+      app_scene->add_mesh_instance(new mesh_instance(node, box, red));
     }
 
     /// this is called to draw the world
