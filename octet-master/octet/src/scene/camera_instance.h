@@ -118,10 +118,10 @@ namespace octet { namespace scene {
         xscale = 0.5f;
         yscale = 0.5f;
         if (yfov) {
-          yscale = tanf(yfov * (3.14159f/180/2));    // !!! should be yfov/2 !!! 
+          yscale = tanf(yfov * (3.14159f/180/2));
           xscale = yscale * aspect_ratio;
         } else if (xfov) {
-          xscale = tanf(xfov * (3.14159f/180/2));    // !!! should be xfov/2 !!! 
+          xscale = tanf(xfov * (3.14159f/180/2));
           yscale = xscale / aspect_ratio;
         }
         cameraToProjection.frustum(-near_plane * xscale, near_plane * xscale, -near_plane * yscale, near_plane * yscale, near_plane, far_plane);
