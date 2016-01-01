@@ -1,0 +1,8 @@
+﻿  Source.cpp
+Source.cpp(11): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+Source.cpp(12): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+Source.cpp(73): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  Generating code
+  All 13 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Square.vcxproj -> C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\Square\Release\Square.exe

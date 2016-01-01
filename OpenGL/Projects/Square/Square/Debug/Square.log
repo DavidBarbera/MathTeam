@@ -1,0 +1,7 @@
+﻿  Source.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\square\square\source.cpp(25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\david\documents\github\mathteam\opengl\projects\square\square\source.cpp(26): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\david\documents\github\mathteam\opengl\projects\square\square\source.cpp(88): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\david\documents\github\mathteam\opengl\projects\square\square\source.cpp(144): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\square\square\source.cpp(161): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+  Square.vcxproj -> C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\Square\Debug\Square.exe

@@ -1,0 +1,4 @@
+﻿  Source.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\prototype\prototype\source.cpp(14): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\david\documents\github\mathteam\opengl\projects\prototype\prototype\source.cpp(15): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  Prototype.vcxproj -> C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\Prototype\Prototype\Debug\Prototype.exe
