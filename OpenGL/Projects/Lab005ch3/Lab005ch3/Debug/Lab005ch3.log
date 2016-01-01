@@ -1,5 +1,5 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
   Source.cpp
-c:\users\david\documents\github\mathteam\opengl\projects\lab005ch3\lab005ch3\source.cpp(14): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\david\documents\github\mathteam\opengl\projects\lab005ch3\lab005ch3\source.cpp(15): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\david\documents\github\mathteam\opengl\projects\lab005ch3\lab005ch3\source.cpp(47): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\lab005ch3\lab005ch3\source.cpp(50): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
   Lab005ch3.vcxproj -> C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\Lab005ch3\Lab005ch3\..\..\..\Bin\Lab005ch3.exe
