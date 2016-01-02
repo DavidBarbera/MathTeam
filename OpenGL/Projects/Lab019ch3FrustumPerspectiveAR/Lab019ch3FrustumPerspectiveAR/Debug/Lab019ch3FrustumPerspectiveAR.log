@@ -1,0 +1,5 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Source.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\lab019ch3frustumperspectivear\lab019ch3frustumperspectivear\source.cpp(44): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\lab019ch3frustumperspectivear\lab019ch3frustumperspectivear\source.cpp(47): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+  Lab019ch3FrustumPerspectiveAR.vcxproj -> C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\Lab019ch3FrustumPerspectiveAR\Lab019ch3FrustumPerspectiveAR\..\..\..\Bin\Lab019ch3FrustumPerspectiveAR.exe
