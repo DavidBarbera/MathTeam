@@ -1,0 +1,6 @@
+﻿  Source.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\lab001\lab001\source.cpp(31): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\lab001\lab001\source.cpp(67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\lab001\lab001\source.cpp(68): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\lab001\lab001\source.cpp(69): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+  Lab001.vcxproj -> C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\Lab001\Lab001\Debug\Lab001.exe

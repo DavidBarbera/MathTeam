@@ -1,0 +1,7 @@
+﻿  Source.cpp
+Source.cpp(14): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+Source.cpp(15): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  Generating code
+  All 12 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Prototype.vcxproj -> C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\Prototype\Prototype\Release\Prototype.exe

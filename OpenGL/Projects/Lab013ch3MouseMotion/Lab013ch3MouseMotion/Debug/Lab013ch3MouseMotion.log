@@ -1,0 +1,4 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Source.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\lab013ch3mousemotion\lab013ch3mousemotion\source.cpp(38): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+  Lab013ch3MouseMotion.vcxproj -> C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\Lab013ch3MouseMotion\Lab013ch3MouseMotion\..\..\..\Bin\Lab013ch3MouseMotion.exe
