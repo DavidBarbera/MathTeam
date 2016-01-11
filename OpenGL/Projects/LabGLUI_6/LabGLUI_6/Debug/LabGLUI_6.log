@@ -1,0 +1,7 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Source.cpp
+c:\users\david\documents\github\mathteam\opengl\libraries\include\gl\glui.h(882): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\labglui_6\labglui_6\source.cpp(162): warning C4101: 'file': unreferenced local variable
+c:\users\david\documents\github\mathteam\opengl\projects\labglui_6\labglui_6\source.cpp(164): warning C4101: 'i': unreferenced local variable
+c:\users\david\documents\github\mathteam\opengl\projects\labglui_6\labglui_6\source.cpp(163): warning C4101: 'c': unreferenced local variable
+  LabGLUI_6.vcxproj -> C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\LabGLUI_6\LabGLUI_6\..\..\..\Bin\LabGLUI_6.exe
