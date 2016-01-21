@@ -1,0 +1,53 @@
+/////////////////////////////////////////////////////////////////////////////
+// bezier.h
+//
+// Author: Alex Kozlowski (kman@graphics.ucsd.edu)
+//
+///////////////////////////////////// 
+// Classes declared: 
+//
+// BezierCurve:   Cubic Bezier Curve Class.
+//
+// BezierPatch:   Cubic Bezier Curve Patch
+//
+/////////////////////////////////////////////////////////////////////////////
+#ifndef CSE167_BEZIER_H_
+#define CSE167_BEZIER_H_
+
+#include "geometry.h"
+
+/////////////////////////////////////////////////////////////////////////////
+// BezierCurve
+//
+class BezierCurve
+{
+////////////////////////////////
+public:
+    BezierCurve() {};
+
+	BezierCurve(Point3 p0,Point3 p1,Point3 p2,Point3 p3);
+
+	void InitPoints(Point3 p0,Point3 p1,Point3 p2,Point3 p3);
+
+    void Evaluate(float t,Point3 &pos,Vector3 &tan);
+
+////////////////////////////////
+// Member Variables
+private:
+        Point3 Points[4]; 
+};
+
+
+/////////////////////////////////////////////////////////////////////////////
+// BezierPatch
+//
+class BezierPatch : public Geometry
+{
+
+////////////////////////////////
+public:
+	BezierPatch (Point3* pArray, int ures, int vres);
+
+};
+
+#endif

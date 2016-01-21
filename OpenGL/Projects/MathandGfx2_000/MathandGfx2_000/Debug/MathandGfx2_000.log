@@ -1,0 +1,53 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  viewer.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\vector.h(254): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(16): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(19): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(30): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(52): error C2039: 'SetColor': is not a member of 'ShapeNode'
+  c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\scenegraph.h(185): note: see declaration of 'ShapeNode'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(52): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(71): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(84): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(91): error C2039: 'SetColor': is not a member of 'ShapeNode'
+  c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\scenegraph.h(185): note: see declaration of 'ShapeNode'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(91): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(125): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(127): warning C4305: '=': truncation from 'double' to 'float'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(131): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(174): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(185): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(195): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(210): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(214): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(223): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(285): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\viewer.cpp(302): warning C4305: 'initializing': truncation from 'double' to 'float'
+  vector.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\vector.h(254): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  scenegraph.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\vector.h(254): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  objfile.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\vector.h(254): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\objfile.cpp(55): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10586.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\objfile.cpp(95): error C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10586.0\ucrt\stdio.h(2254): note: see declaration of 'sscanf'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\objfile.cpp(108): error C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10586.0\ucrt\stdio.h(2254): note: see declaration of 'sscanf'
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\objfile.cpp(116): error C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10586.0\ucrt\stdio.h(2254): note: see declaration of 'sscanf'
+  matrix.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\vector.h(254): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  main.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\vector.h(254): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  light.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\vector.h(254): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  geometry.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\vector.h(254): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  camera.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\vector.h(254): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  bezier.cpp
+c:\users\david\documents\github\mathteam\opengl\projects\mathandgfx2_000\mathandgfx2_000\vector.h(254): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
