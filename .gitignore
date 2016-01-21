@@ -14,6 +14,11 @@ $RECYCLE.BIN/
 *.sdf
 *.obj
 *.pdb
+*.ilk
+*.iobj
+*.idb
+*.ipdb
+*.tlog
 
 # Windows Installer files
 *.cab
