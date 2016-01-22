@@ -65,16 +65,16 @@ void setup()
 
 void resize(int w, int h)
 {
-	glViewport(0, 0, w, h);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0.0, 100.0, 0.0, 100.0, -1.0, 1.0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+		glViewport(0, 0, w, h);
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0.0, 100.0, 0.0, 100.0, -1.0, 1.0);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
 
-	// Pass the size of the OpenGL window to globals.
-	width = w;
-	height = h;
+		// Pass the size of the OpenGL window to globals.
+		width = w;
+		height = h;
 }
 
 void KeyInput(unsigned char key, int x, int y)
