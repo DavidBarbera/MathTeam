@@ -14,26 +14,25 @@ No callbacks are used.
 
 #include <string.h>
 #include "Libraries.h"
+
+//#include "h"
+//#include "things.h"
+#include "Global.h"
 #include "Scene.h"
-#include "things.h"
 //#include "teapot.h"             // 3D mesh of teapot
 //#include "cameraSimple.h"       // 3D mesh of camera
 
-/** These are the live variables passed into GLUI ***/
-//int   wireframe = 0;
-//int   segments = 8;
-//int   main_window;
+Scene scene;
 
-int window_width = 700;
-int window_height = 700;
+int window_width = 1368;
+int window_height = 768;
 
 float xy_aspect;
 int   last_x, last_y;
 float rotationX = 0.0, rotationY = 0.0;
 
-Scene scene;
-
 /** These are the live variables passed into GLUI ***/
+
 int   wireframe = 0;
 int   obj_type = 1;
 int   segments = 8;
@@ -46,6 +45,7 @@ int   main_window;
 float scale = 1.0;
 int   show_sphere = 1;
 int   show_torus = 1;
+
 
 /** Pointers to the windows and some of the controls we'll create **/
 GLUI *glui;
@@ -69,6 +69,7 @@ GLfloat light0_position[] = { .5f, .5f, 1.0f, 0.0f };
 GLfloat light1_ambient[] = { 0.1f, 0.1f, 0.3f, 1.0f };
 GLfloat light1_diffuse[] = { .9f, .6f, 0.0f, 1.0f };
 GLfloat light1_position[] = { -1.0f, -1.0f, 1.0f, 0.0f };
+
 
 /**************************************** control_cb() *******************/
 /* GLUI control callback                                                 */
@@ -115,10 +116,11 @@ void control_cb(int control)
 
 		glLightfv(GL_LIGHT1, GL_DIFFUSE, v);
 	}
+	
 }
 
 /***************************************** myGlutIdle() ***********/
-/*
+
 void myGlutIdle(void)
 {
 	// According to the GLUT specification, the current window is
@@ -129,7 +131,7 @@ void myGlutIdle(void)
 
 	glutPostRedisplay();
 }
-*/
+
 
 /**************************************** myGlutKeyboard() **********/
 
@@ -156,15 +158,6 @@ void myGlutMenu(int value)
 
 void myGlutReshape(int w, int h)
 {
-	//float xy_aspect;
-
-	//xy_aspect = (float)x / (float)y;
-	//glViewport(0, 0, x, y);
-
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-	//glFrustum(-xy_aspect*.08, xy_aspect*.08, -.08, .08, .1, 15.0);
-	//glFrustum(-xy_aspect*.04, xy_aspect*.04, -.04, .04, .1, 15.0);
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -172,9 +165,7 @@ void myGlutReshape(int w, int h)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	// Pass the size of the OpenGL window to globals.
-	//window_width = w;
-	//window_height = h;
+
 	scene.setWindowSize(w, h);
 
 	glutPostRedisplay();
@@ -184,49 +175,6 @@ void myGlutReshape(int w, int h)
 
 void myGlutDisplay(void)
 {
-/*	glClearColor(.9f, .9f, .9f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-
-	glFrustum(-xy_aspect*.04, xy_aspect*.04, -.04, .04, .1, 15.0);
-	
-	
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glTranslatef(0.0, 0.0, -2.6f);
-	drawGrid(10, 0.2);
-
-	glScalef(scale, scale, scale);
-*/
-	/*** Now we render object, using the variables 'obj_type', 'segments', and
-	'wireframe'.  These are _live_ variables, which are transparently
-	updated by GLUI ***/
-/*
-	glPushMatrix();
-	glTranslatef(-.5, 0.0, 0.0);
-	glRotatef(rotationY, 0.0, 1.0, 0.0);
-	glRotatef(rotationX, 1.0, 0.0, 0.0);
-	if (wireframe && show_sphere)
-		glutWireSphere(.4, segments, segments);
-	else if (show_sphere)
-		glutSolidSphere(.4, segments, segments);
-	//draw_axes(.52f);
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(.5, 0.0, 0.0);
-	glRotatef(rotationY, 0.0, 1.0, 0.0);
-	glRotatef(rotationX, 1.0, 0.0, 0.0);
-	if (wireframe && show_torus)
-		glutWireTorus(.15, .3, 16, segments);
-	else if (show_torus)
-		glutSolidTorus(.15, .3, 16, segments);
-//	draw_axes(.52f);
-	glPopMatrix();
-*/
 	scene.draw();
 	glutSwapBuffers();
 }
@@ -238,14 +186,21 @@ void myGlutMotion(int x, int y)
 
 	last_x = x;
 	last_y = y;
-	//scene.setMousePosition(x, y);
+
 	scene.rotateCamera(x, y);
-	glutPostRedisplay();
+	//scene.rotateModel(x, y);
+
+	
+ 	glutPostRedisplay();
 }
 
 void myGlutMouse(int button, int button_state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && button_state == GLUT_DOWN) {
+		last_x = x;
+		last_y = y;
+	}
+	if (button == GLUT_RIGHT_BUTTON && button_state == GLUT_DOWN) {
 		last_x = x;
 		last_y = y;
 	}
@@ -260,11 +215,11 @@ void glutWindowSystem(int argc, char* argv[]) {
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowPosition(0, 0);
 	glutInitWindowSize(window_width, window_height);
-	//scene.setWindowSize(window_width, window_height);
+	//setWindowSize(window_width, window_height);
 	scene.setViewMatrix(0, 0, 10, 0, 0, 0);
 	scene.setModelMatrix(0, 0, 0, 0, 0, 0);
 
-	main_window = glutCreateWindow("GLUI Example 1");
+	main_window = glutCreateWindow("MVC to GLUI");
 	glutDisplayFunc(myGlutDisplay);
 	glutReshapeFunc(myGlutReshape);
 	glutKeyboardFunc(myGlutKeyboard);

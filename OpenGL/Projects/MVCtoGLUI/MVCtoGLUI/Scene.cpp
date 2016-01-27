@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "Global.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Scene.cpp
@@ -23,6 +24,9 @@
 #include <GL/glu.h>
 #endif
 */
+
+#pragma once
+#include "Global.h"
 #include <cmath>
 #include "Scene.h"
 #include "teapot.h"             // 3D mesh of teapot
@@ -58,6 +62,8 @@ cameraDistance(CAMERA_DISTANCE), windowSizeChanged(false)
 	modelPosition[0] = modelPosition[1] = modelPosition[2] = 0;
 	modelAngle[0] = modelAngle[1] = modelAngle[2] = 0;
 	bgColor[0] = bgColor[1] = bgColor[2] = bgColor[3] = 0;
+
+	cameraAngleX = cameraAngleY = 0;
 
 	matrixView = glm::mat4(1.0f);
 	matrixModel = glm::mat4(1.0f);
@@ -301,14 +307,15 @@ void Scene::drawSub1()
 
 	// set upper viewport, make it square
 	if (windowWidth > halfHeight)
-		setViewportSub((windowWidth - halfHeight) / 2, halfHeight, halfHeight, halfHeight, 1, 10);
+		//setViewportSub((windowWidth - halfHeight) / 2, halfHeight, halfHeight, halfHeight, 1, 10);
+		setViewportSub(0,0, halfHeight, halfHeight, 1, 10);
 	else
-		setViewportSub(0, halfHeight + (halfHeight - windowWidth) / 2, windowWidth, windowWidth, 1, 10);
-
+		//setViewportSub(0, halfHeight + (halfHeight - windowWidth) / 2, windowWidth, windowWidth, 1, 10);
+		setViewportSub(0,0, windowWidth, windowWidth, 1, 10);
 	// clear buffer
 	glClearColor(0.2f, 0.2f, 0.2f, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
+	
 	glPushMatrix();
 
 	// set view matrix ========================================================
@@ -316,15 +323,17 @@ void Scene::drawSub1()
 	// Note that OpenGL uses column-major matrix, so transpose the matrix first
 	// See updateViewMatrix() how matrixView is constructed. The equivalent
 	// OpenGL calls are;
-	//    glLoadIdentity();
-	//    glRotatef(-cameraAngle[2], 0, 0, 1); // roll
-	//    glRotatef(-cameraAngle[1], 0, 1, 0); // heading
-	//    glRotatef(-cameraAngle[0], 1, 0, 0); // pitch
-	//    glTranslatef(-cameraPosition[0], -cameraPosition[1], -cameraPosition[2]);
-	glLoadMatrixf(glm::value_ptr(matrixView));
+	    glLoadIdentity();
+		
+	    glRotatef(-cameraAngle[2], 0, 0, 1); // roll
+	    glRotatef(-cameraAngle[1], 0, 1, 0); // heading
+	    glRotatef(-cameraAngle[0], 1, 0, 0); // pitch
+	   glTranslatef(-cameraPosition[0], -cameraPosition[1], -cameraPosition[2]);
+	//glLoadMatrixf(glm::value_ptr(matrixView));
 
 	// always draw the grid at the origin (before any modeling transform)
 	drawGrid(10, 1);
+	drawAxis(4);
 
 	// transform objects ======================================================
 	// From now, all transform will be for modeling matrix only.
@@ -332,21 +341,22 @@ void Scene::drawSub1()
 	// See updateModelMatrix() how matrixModel is constructed. The equivalent
 	// OpenGL calls are;
 	//    glLoadIdentity();
-	//    glTranslatef(modelPosition[0], modelPosition[1], modelPosition[2]);
-	//    glRotatef(modelAngle[0], 1, 0, 0);
-	//    glRotatef(modelAngle[1], 0, 1, 0);
-	//    glRotatef(modelAngle[2], 0, 0, 1);
+	 //   glTranslatef(modelPosition[0], modelPosition[1], modelPosition[2]);
+	  //  glRotatef(modelAngle[0], 1, 0, 0);
+	 //   glRotatef(modelAngle[1], 0, 1, 0);
+	 //   glRotatef(modelAngle[2], 0, 0, 1);
 
 	// compute GL_MODELVIEW matrix by multiplying matrixView and matrixModel
 	// before drawing the object:
 	// ModelView_M = View_M * Model_M
 	// This modelview matrix transforms the objects from object space to eye space.
 	// copy modelview matrix to OpenGL after transpose
-	glLoadMatrixf(glm::value_ptr(matrixModelView));
+//	glLoadMatrixf(glm::value_ptr(matrixModelView));
 	// draw a teapot after ModelView transform
 	// v' = Mmv * v
-	drawAxis(4);
+	
 	drawTeapot();
+	drawAxis(4);
 
 	glPopMatrix();
 }
@@ -360,11 +370,13 @@ void Scene::drawSub1()
 void Scene::drawSub2()
 {
 	// set bottom viewport
-	setViewportSub(0, 0, windowWidth, windowHeight / 2, NEAR_PLANE, FAR_PLANE);
+	setViewportSub(0, 0, windowWidth, windowHeight, NEAR_PLANE, FAR_PLANE);
 
 	// clear buffer
 	glClearColor(bgColor[0], bgColor[1], bgColor[2], bgColor[3]);   // background color
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	drawGrid(10, 1);
 
 	glPushMatrix();
 
@@ -373,25 +385,25 @@ void Scene::drawSub2()
 	glRotatef(cameraAngleX, 1, 0, 0); // pitch
 	glRotatef(cameraAngleY, 0, 1, 0); // heading
 
-									  // draw grid
-	drawGrid(10, 1);
+	//drawGrid(10, 1);								  // draw grid
+	
 
 	// draw a teapot
 	glPushMatrix();
-	glTranslatef(modelPosition[0], modelPosition[1], modelPosition[2]);
-	glRotatef(modelAngle[0], 1, 0, 0);
-	glRotatef(modelAngle[1], 0, 1, 0);
-	glRotatef(modelAngle[2], 0, 0, 1);
+		glTranslatef(modelPosition[0], modelPosition[1], modelPosition[2]);
+		glRotatef(modelAngle[0], 1, 0, 0);
+		glRotatef(modelAngle[1], 0, 1, 0);
+		glRotatef(modelAngle[2], 0, 0, 1);
 	drawAxis(4);
 	drawTeapot();
 	glPopMatrix();
 
 	// draw the camera
 	glPushMatrix();
-	glTranslatef(cameraPosition[0], cameraPosition[1], cameraPosition[2]);
-	glRotatef(cameraAngle[0], 1, 0, 0);
-	glRotatef(cameraAngle[1], 0, 1, 0);
-	glRotatef(cameraAngle[2], 0, 0, 1);
+		glTranslatef(cameraPosition[0], cameraPosition[1], cameraPosition[2]);
+		glRotatef(cameraAngle[0], 1, 0, 0);
+		glRotatef(cameraAngle[1], 0, 1, 0);
+		glRotatef(cameraAngle[2], 0, 0, 1);
 	drawCamera();
 	drawFrustum(FOV_Y, 1, 1, 10);
 	glPopMatrix();
@@ -661,7 +673,12 @@ void Scene::rotateCamera(int x, int y)
 	mouseY = y;
 }
 
-
+void Scene::rotateModel(int x, int y) {
+	modelAngleY += (x - mouseX);
+	modelAngleX += (y - mouseY);
+	mouseX = x;
+	mouseY = y;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // zoom the camera for subWin2 (3rd person view)

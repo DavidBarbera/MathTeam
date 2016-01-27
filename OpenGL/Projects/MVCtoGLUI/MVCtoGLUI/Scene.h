@@ -64,6 +64,7 @@ public:
 	void rotateCamera(int x, int y);
 	void zoomCamera(int dist);
 	void zoomCameraDelta(int delta);        // for mousewheel
+	void rotateModel(int x, int y);
 
 	void drawGrid(float size, float step);          // draw a grid on XZ plane
 	void drawAxis(float size);                      // draw 3 axis
@@ -104,6 +105,8 @@ private:
 	float cameraAngleY;
 	float cameraDistance;
 	float bgColor[4];
+	float modelAngleX;
+	float modelAngleY;
 
 	// 4x4 transform matrices
 	/*Matrix4 matrixView;

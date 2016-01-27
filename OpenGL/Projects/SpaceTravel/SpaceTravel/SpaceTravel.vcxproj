@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BB559872-33A2-47D2-8E79-959A5F0F1679}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>MVCtoGLUI</RootNamespace>
+    <RootNamespace>SpaceTravel</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -150,17 +150,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="cameraSimple.h" />
-    <ClInclude Include="Global.h" />
     <ClInclude Include="Libraries.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="teapot.h" />
-    <ClInclude Include="things.h" />
-    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
