@@ -1,0 +1,25 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Source.cpp
+  LINK : ..\..\..\Bin\Lab008ch3.exe not found or not built by the last incremental link; performing full link
+Source.obj : error LNK2019: unresolved external symbol __imp_glewInit referenced in function "void __cdecl init_glew(void)" (?init_glew@@YAXXZ)
+Source.obj : error LNK2019: unresolved external symbol __imp_glewGetErrorString referenced in function "void __cdecl init_glew(void)" (?init_glew@@YAXXZ)
+Source.obj : error LNK2019: unresolved external symbol __imp_glutInitWindowPosition referenced in function main
+Source.obj : error LNK2019: unresolved external symbol __imp_glutInitWindowSize referenced in function main
+Source.obj : error LNK2019: unresolved external symbol __imp_glutInitDisplayMode referenced in function main
+Source.obj : error LNK2019: unresolved external symbol __imp_glutMainLoop referenced in function main
+Source.obj : error LNK2019: unresolved external symbol __imp_glutSwapBuffers referenced in function "void __cdecl display(void)" (?display@@YAXXZ)
+Source.obj : error LNK2019: unresolved external symbol __imp_glutKeyboardFunc referenced in function main
+Source.obj : error LNK2019: unresolved external symbol __imp_glutReshapeFunc referenced in function main
+Source.obj : error LNK2019: unresolved external symbol __imp_glutDisplayFunc referenced in function main
+Source.obj : error LNK2019: unresolved external symbol __imp___glutInitWithExit referenced in function glutInit_ATEXIT_HACK
+Source.obj : error LNK2019: unresolved external symbol __imp___glutCreateWindowWithExit referenced in function glutCreateWindow_ATEXIT_HACK
+Source.obj : error LNK2001: unresolved external symbol __imp___glewBindBuffer
+Source.obj : error LNK2001: unresolved external symbol __imp___glewBufferData
+Source.obj : error LNK2001: unresolved external symbol __imp___glewBufferSubData
+Source.obj : error LNK2001: unresolved external symbol __imp___glewGenBuffers
+Source.obj : error LNK2001: unresolved external symbol __imp___glewBindVertexArray
+Source.obj : error LNK2001: unresolved external symbol __imp___glewGenVertexArrays
+Source.obj : error LNK2001: unresolved external symbol __imp_glewExperimental
+../../../Libraries/lib/freeglut.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+../../../Libraries/lib/glew32.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+..\..\..\Bin\Lab008ch3.exe : fatal error LNK1120: 19 unresolved externals

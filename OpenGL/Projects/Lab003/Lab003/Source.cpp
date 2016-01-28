@@ -39,8 +39,8 @@ void resize(int w, int h)
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	//glOrtho(-5.0, 5.0, -5.0, 5.0, -10.0, 20.0);
-	glFrustum(-1, 1, -1, 1, 1.5, 20);
+	glOrtho(-5.0, 5.0, -5.0, 5.0, -10.0, 20.0);
+	//glFrustum(-1, 1, -1, 1, 1.5, 20);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -50,19 +50,7 @@ void KeyInput(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-	case ' ':
-		Xvalue = Yvalue = Angle = 0.0;
-		glutPostRedisplay();
-		break;
-	case 'A':
-		Angle += 10.0;
-		glutPostRedisplay();
-		break;
-	case 27:
-		exit(0);
-		break;
-	default:
-		break;
+	
 	}
 }
 

@@ -1,6 +1,7 @@
 ﻿  Source.cpp
-c:\users\david\documents\github\mathteam\opengl\projects\lab001\lab001\source.cpp(31): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\david\documents\github\mathteam\opengl\projects\lab001\lab001\source.cpp(67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\david\documents\github\mathteam\opengl\projects\lab001\lab001\source.cpp(68): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\users\david\documents\github\mathteam\opengl\projects\lab001\lab001\source.cpp(69): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-  Lab001.vcxproj -> C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\Lab001\Lab001\Debug\Lab001.exe
+c:\users\javoo\onedrive\documentos\github\mathteam\opengl\projects\lab001\lab001\source.cpp(31): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\javoo\onedrive\documentos\github\mathteam\opengl\projects\lab001\lab001\source.cpp(67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\javoo\onedrive\documentos\github\mathteam\opengl\projects\lab001\lab001\source.cpp(68): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\javoo\onedrive\documentos\github\mathteam\opengl\projects\lab001\lab001\source.cpp(69): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+  LINK : C:\Users\javoo\OneDrive\Documentos\GitHub\MathTeam\OpenGL\Projects\Lab001\Lab001\Debug\Lab001.exe not found or not built by the last incremental link; performing full link
+  Lab001.vcxproj -> C:\Users\javoo\OneDrive\Documentos\GitHub\MathTeam\OpenGL\Projects\Lab001\Lab001\Debug\Lab001.exe

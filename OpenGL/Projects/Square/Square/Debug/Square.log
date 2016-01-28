@@ -1,7 +1,2 @@
-﻿  Source.cpp
-c:\users\david\documents\github\mathteam\opengl\projects\square\square\source.cpp(25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\david\documents\github\mathteam\opengl\projects\square\square\source.cpp(26): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\david\documents\github\mathteam\opengl\projects\square\square\source.cpp(88): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\david\documents\github\mathteam\opengl\projects\square\square\source.cpp(144): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-c:\users\david\documents\github\mathteam\opengl\projects\square\square\source.cpp(161): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-  Square.vcxproj -> C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\Square\Debug\Square.exe
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Square.vcxproj -> C:\Users\javoo\OneDrive\Documentos\GitHub\MathTeam\OpenGL\Projects\Square\Square\..\..\..\Bin\Square.exe

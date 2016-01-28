@@ -1,13 +1,16 @@
 ﻿  Source.cpp
-c:\users\david\documents\github\mathteam\opengl\projects\square\square\source.cpp(11): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\david\documents\github\mathteam\opengl\projects\square\square\source.cpp(12): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\david\documents\github\mathteam\opengl\projects\square\square\source.cpp(73): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\javoo\onedrive\documentos\github\mathteam\opengl\projects\square\square\source.cpp(25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\javoo\onedrive\documentos\github\mathteam\opengl\projects\square\square\source.cpp(26): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\javoo\onedrive\documentos\github\mathteam\opengl\projects\square\square\source.cpp(88): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\users\javoo\onedrive\documentos\github\mathteam\opengl\projects\square\square\source.cpp(144): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\javoo\onedrive\documentos\github\mathteam\opengl\projects\square\square\source.cpp(161): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
 Source.obj : error LNK2019: unresolved external symbol __imp_glewInit referenced in function "void __cdecl init_glew(void)" (?init_glew@@YAXXZ)
 Source.obj : error LNK2019: unresolved external symbol __imp_glewGetErrorString referenced in function "void __cdecl init_glew(void)" (?init_glew@@YAXXZ)
 Source.obj : error LNK2019: unresolved external symbol __imp_glutInitWindowPosition referenced in function main
 Source.obj : error LNK2019: unresolved external symbol __imp_glutInitWindowSize referenced in function main
 Source.obj : error LNK2019: unresolved external symbol __imp_glutInitDisplayMode referenced in function main
 Source.obj : error LNK2019: unresolved external symbol __imp_glutMainLoop referenced in function main
+Source.obj : error LNK2019: unresolved external symbol __imp_glutPostRedisplay referenced in function "void __cdecl KeyInput(unsigned char,int,int)" (?KeyInput@@YAXEHH@Z)
 Source.obj : error LNK2019: unresolved external symbol __imp_glutSwapBuffers referenced in function "void __cdecl display(void)" (?display@@YAXXZ)
 Source.obj : error LNK2019: unresolved external symbol __imp_glutKeyboardFunc referenced in function main
 Source.obj : error LNK2019: unresolved external symbol __imp_glutReshapeFunc referenced in function main
@@ -17,4 +20,4 @@ Source.obj : error LNK2019: unresolved external symbol __imp___glutCreateWindowW
 Source.obj : error LNK2001: unresolved external symbol __imp_glewExperimental
 ../../../Libraries/lib/freeglut.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
 ../../../Libraries/lib/glew32.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
-C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\Square\x64\Debug\Square.exe : fatal error LNK1120: 13 unresolved externals
+C:\Users\javoo\OneDrive\Documentos\GitHub\MathTeam\OpenGL\Projects\Square\x64\Debug\Square.exe : fatal error LNK1120: 14 unresolved externals

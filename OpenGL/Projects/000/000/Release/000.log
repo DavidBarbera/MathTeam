@@ -1,5 +1,7 @@
 ﻿  Source.cpp
   Generating code
-  All 19 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  16 of 19 functions (84.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  000.vcxproj -> C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\000\Release\000.exe
+  000.vcxproj -> C:\Users\javoo\OneDrive\Documentos\GitHub\MathTeam\OpenGL\Projects\000\Release\000.exe

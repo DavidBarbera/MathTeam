@@ -1,4 +1,2 @@
-﻿  Source.cpp
-c:\users\david\documents\github\mathteam\opengl\projects\prototype\prototype\source.cpp(14): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\users\david\documents\github\mathteam\opengl\projects\prototype\prototype\source.cpp(15): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-  Prototype.vcxproj -> C:\Users\David\Documents\GitHub\MathTeam\OpenGL\Projects\Prototype\Prototype\Debug\Prototype.exe
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Prototype.vcxproj -> C:\Users\javoo\OneDrive\Documentos\GitHub\MathTeam\OpenGL\Projects\Prototype\Prototype\..\..\..\Bin\Prototype.exe
