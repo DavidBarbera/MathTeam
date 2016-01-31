@@ -104,8 +104,8 @@ float modelPosition[3];
 float modelAngle[3];
 
 // these are for 3rd person view
-float cameraAngleX(CAMERA_ANGLE_X);
-float cameraAngleY(CAMERA_ANGLE_Y);
+float cameraAngleX(-CAMERA_ANGLE_X);
+float cameraAngleY(-CAMERA_ANGLE_Y);
 float cameraDistance(CAMERA_DISTANCE);
 float bgColor[4];
 float modelAngleX(0);
@@ -690,6 +690,9 @@ void rotateCamera(int x, int y)
 void rotateModel(int x, int y) {
 	modelAngleX += (x - mouseX);
 	modelAngleY += (y - mouseY);
+	setModelAngleX(modelAngleX);
+	setModelAngleX(modelAngleY);
+
 	mouseX = x;
 	mouseY = y;
 }
@@ -798,6 +801,10 @@ void drawSub1()
 	// This modelview matrix transforms the objects from object space to eye space.
 	// copy modelview matrix to OpenGL after transpose
 	glLoadMatrixf(matrixModelView.getTranspose());
+	//live
+//	glRotatef(modelAngleY, 1, 0, 0); // pitch
+//	glRotatef(modelAngleX, 0, 1, 0);
+	
 
 	// draw a teapot after ModelView transform
 	// v' = Mmv * v
@@ -826,8 +833,9 @@ void drawSub2()
 
 	// First, transform the camera (viewing matrix) from world space to eye space
 	glTranslatef(0, 0, -cameraDistance);
-	glRotatef(cameraAngleX, 1, 0, 0); // pitch
-	glRotatef(cameraAngleY, 0, 1, 0); // heading
+	//live
+	glRotatef(cameraAngleY, 1, 0, 0); // pitch
+	glRotatef(cameraAngleX, 0, 1, 0); // heading
 
 									  // draw grid
 	drawGrid(10, 1);
@@ -838,6 +846,10 @@ void drawSub2()
 	glRotatef(modelAngle[0], 1, 0, 0);
 	glRotatef(modelAngle[1], 0, 1, 0);
 	glRotatef(modelAngle[2], 0, 0, 1);
+	//live
+//	glRotatef(modelAngleY, 1, 0, 0); // pitch
+//	glRotatef(modelAngleX, 0, 1, 0);
+
 	drawAxis(4);
 	drawTeapot();
 	glPopMatrix();
@@ -848,6 +860,10 @@ void drawSub2()
 	glRotatef(cameraAngle[0], 1, 0, 0);
 	glRotatef(cameraAngle[1], 0, 1, 0);
 	glRotatef(cameraAngle[2], 0, 0, 1);
+	//live
+	glRotatef(cameraModelAngleY, 1, 0, 0); // pitch
+	glRotatef(cameraModelAngleX, 0, 1, 0);
+
 	drawCamera();
 	drawFrustum(FOV_Y, 1, 1, 10);
 	glPopMatrix();
@@ -915,10 +931,12 @@ void control_cb(int control)
 	printf("          spinners group: %d\n", spcameraX);
 
 
-	if (control == radio2->get_int_val())
-		drawModeChanged = true;
+	
 
 	switch (control) {
+	case 4: setDrawMode(radio1->get_int_val());
+		drawModeChanged = true;
+		break;
 	case 6: setCameraX(spcameraX);
 		break;
 	case 7:setCameraY(spcameraY);
@@ -1129,11 +1147,11 @@ void GluiWindowSystem()
 	spinnerCamera[2] = new GLUI_Spinner(glui, "Camera Z", &spcameraZ, 8, control_cb);
 	spinnerCamera[2]->set_int_limits(-10, 10);
 	spinnerCamera[3] = new GLUI_Spinner(glui, "Camera Pitch", &spcameraPitch, 9, control_cb);
-	spinnerCamera[3]->set_int_limits(-10, 10);
+	spinnerCamera[3]->set_int_limits(-360, 360);
 	spinnerCamera[4] = new GLUI_Spinner(glui, "Camera Heading", &spcameraHeading, 10, control_cb);
-	spinnerCamera[4]->set_int_limits(-10, 10);
+	spinnerCamera[4]->set_int_limits(-360, 360);
 	spinnerCamera[5] = new GLUI_Spinner(glui, "Camera Roll", &spcameraRoll, 11, control_cb);
-	spinnerCamera[5]->set_int_limits(-10, 10);
+	spinnerCamera[5]->set_int_limits(-360, 360);
 
 	//-------
 	spinnerModel[0] = new GLUI_Spinner(glui, "Model X", &spmodelX, 12, control_cb);
@@ -1143,11 +1161,11 @@ void GluiWindowSystem()
 	spinnerModel[2] = new GLUI_Spinner(glui, "Model Z", &spmodelZ, 14, control_cb);
 	spinnerModel[2]->set_int_limits(-10, 10);
 	spinnerModel[3] = new GLUI_Spinner(glui, "Model Pitch", &spmodelPitch, 15, control_cb);
-	spinnerModel[3]->set_int_limits(-10, 10);
+	spinnerModel[3]->set_int_limits(-360, 360);
 	spinnerModel[4] = new GLUI_Spinner(glui, "Model Heading", &spmodelHeading, 16, control_cb);
-	spinnerModel[4]->set_int_limits(-10, 10);
+	spinnerModel[4]->set_int_limits(-360, 360);
 	spinnerModel[5] = new GLUI_Spinner(glui, "Model Roll", &spmodelRoll, 17, control_cb);
-	spinnerModel[5]->set_int_limits(-10, 10);
+	spinnerModel[5]->set_int_limits(-360, 360);
 
 	//------
 

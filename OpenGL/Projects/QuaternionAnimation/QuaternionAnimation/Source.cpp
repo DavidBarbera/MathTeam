@@ -428,12 +428,12 @@ void keyInput(unsigned char key, int x, int y)
 		glutPostRedisplay();
 		break;
 	case 'z':
-		Zangle += 5.0;
+		Zangle += 10.0;
 		if (Zangle > 180.0) Zangle -= 360.0;
 		glutPostRedisplay();
 		break;
 	case 'Z':
-		Zangle -= 5.0;
+		Zangle -= 10.0;
 		if (Zangle <= -180.0) Zangle += 360.0;
 		glutPostRedisplay();
 		break;
@@ -444,7 +444,7 @@ void keyInput(unsigned char key, int x, int y)
 		animate(1);
 		glutPostRedisplay();
 		break;
-	case 127:
+	case ' ':
 		Zangle = Yangle = Xangle = 0.0;
 		isAnimate = 0;
 		t = 0.0;
