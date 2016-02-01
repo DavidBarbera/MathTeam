@@ -35,10 +35,7 @@ public:
 	/////////////////////////////// Definition of Headers ////////////////////////
 
 	// 1. Default Constructor
-	Quat() : W(1.0f), X(0.0f), Y(0.0f), Z(0.0f)  {};
-
-	// 2. Constructor with four components
-	Quat(float w, float x, float y, float z) : W(w), X(x), Y(y), Z(z)  { }
+	Quat() : X(0.0f), Y(0.0f), Z(0.0f), W(1.0f) {};
 
 	// 2. Constructor which converts a matrix to a quaternion
 	Quat(const Matrix4& mat);
@@ -63,9 +60,6 @@ public:
 
 	// 9. Creates a matrix from this quaternion
 	inline Matrix4 getMatrix() const;
-
-	// 10. Conver Euler Angles to Quaternions
-	Quat& eulerAnglesToQuaternion(const Vector3& vec);
 
 
 	/////////////////////////////// Definition of Headers ////////////////////////
@@ -93,11 +87,10 @@ inline Quat::Quat(const Vector3& vec)
 // 5. Assignment operator (quaternion = quaternion)
 inline Quat& Quat::operator=(const Quat& other)
 {
-	W = other.W;
 	X = other.X;
 	Y = other.Y;
 	Z = other.Z;
-	
+	W = other.W;
 	return *this;
 }
 
@@ -162,31 +155,32 @@ inline Matrix4 Quat::getMatrix() const
 }
 
 
-// 10. Routine to convert the Euler angle specifying a rotation to a quaternion. 
-Quat& Quat::eulerAnglesToQuaternion(const Vector3& vec)
-{
-	float alpha, beta, gamma;
-	//Quat *q1, *q2, *q3;
-	Quat q,q4;
-
-	alpha = vec[0]; beta = vec[1]; gamma = vec[2];
-
-	Quat q1(cos((PI / 180.0) * (alpha / 2.0)), sin((PI / 180.0) * (alpha / 2.0)), 0.0f, 0.0f);
-	Quat q2(cos((PI / 180.0) * (beta / 2.0)), 0.0f, sin((PI / 180.0) * (beta / 2.0)), 0.0f);
-	Quat q3(cos((PI / 180.0) * (gamma / 2.0)), 0.0f, 0.0f, sin((PI / 180.0) * (gamma / 2.0)));
-	q4= (q3*q2);
-	q= q4*q1;
-
-	printf("j\tq1\t%f %f %f %f	0\n", q1.W, q1.X, q1.Y, q1.Z);
-	printf("j\tq2\t%f %f %f %f	0\n", q2.W, q2.X, q2.Y, q2.Z);
-	printf("j\tq3\t%f %f %f %f	0\n", q3.W, q3.X, q3.Y, q3.Z);
-	printf("j\tq3\t%f %f %f %f	0\n", q4.W, q4.X, q4.Y, q4.Z);
-	printf("j\tq3\t%f %f %f %f	0\n", q.W, q.X, q.Y, q.Z);
-
-	X = q.X;
-	Y = q.Y;
-	Z = q.Z;
-	W = q.W;
-
-	return *this;
-}
+//RotationMatrix quaternionToRotationMatrix(Quaternion q)
+//{
+//	float w, x, y, z;
+//	float m[16];
+//
+//	w = q.getW(); x = q.getX(); y = q.getY(); z = q.getZ();
+//
+//	m[0] = w*w + x*x - y*y - z*z;
+//	m[1] = 2.0*x*y + 2.0*w*z;
+//	m[2] = 2.0*x*z - 2.0*y*w;
+//	m[3] = 0.0;
+//
+//	m[4] = 2.0*x*y - 2.0*w*z;
+//	m[5] = w*w - x*x + y*y - z*z;
+//	m[6] = 2.0*y*z + 2.0*w*x;
+//	m[7] = 0.0;
+//
+//	m[8] = 2.0*x*z + 2.0*w*y;
+//	m[9] = 2.0*y*z - 2.0*w*x;
+//	m[10] = w*w - x*x - y*y + z*z;
+//	m[11] = 0.0;
+//
+//	m[12] = 0.0;
+//	m[13] = 0.0;
+//	m[14] = 0.0;
+//	m[15] = 1.0;
+//
+//	return *new RotationMatrix(m);
+//}

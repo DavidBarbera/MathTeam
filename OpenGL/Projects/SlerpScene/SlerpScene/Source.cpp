@@ -54,6 +54,8 @@ int   main_window;
 float scale = 1.0;
 int   show_sphere = 1;
 int   show_torus = 1;
+int nearPlane;
+int farPlane;
 
 // Using a std::string as a live variable is safe.
 std::string text = "Hello World!";
@@ -214,6 +216,11 @@ Quaternion eulerAnglesToQuaternion(EulerAngles e)
 	q2 = new Quaternion(cos((PI / 180.0) * (beta / 2.0)), 0.0, sin((PI / 180.0) * (beta / 2.0)), 0.0);
 	q3 = new Quaternion(cos((PI / 180.0) * (gamma / 2.0)), 0.0, 0.0, sin((PI / 180.0) * (gamma / 2.0)));
 
+	printf("s\tq\t%f %f %f %f	0\n", q1->getW(), q1->getX(), q1->getY(), q1->getZ());
+	printf("s\tq\t%f %f %f %f	0\n", q2->getW(), q2->getX(), q2->getY(), q2->getZ());
+	printf("s\tq\t%f %f %f %f	0\n", q3->getW(), q3->getX(), q3->getY(), q3->getZ());
+
+
 	return multiplyQuaternions(*q1, multiplyQuaternions(*q2, *q3));
 }
 
@@ -351,8 +358,8 @@ void init()
 {
 
 	// Initialize global matrixData.
-	for (int i = 0; i < 16; i++) matrixData[i] = 0.0;
-	matrixData[0] = matrixData[5] = matrixData[10] = matrixData[15] = 1.0;
+/*	for (int i = 0; i < 16; i++) matrixData[i] = 0.0;
+	matrixData[0] = matrixData[5] = matrixData[10] = matrixData[15] = 1.0;*/
 
 	glShadeModel(GL_SMOOTH);                        // shading method: GL_SMOOTH or GL_FLAT
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);          // 4-byte pixel alignment
@@ -1230,15 +1237,16 @@ void quaternionToEuler(Quaternion q, EulerAngles* e)
 
 void animate(int value)
 {
-	Quaternion qInterpolated;
+	Quaternion qIn;
 	Matrix4 r;
 
 	if (isAnimate)
 	{
 		if (t < 1.0) t += 0.04;
-		qInterpolated = slerp(identityQuaternion, q, t);
-		r = quaternionToRotationMatrix(qInterpolated);
-		writeMatrixData(r);
+		qIn = slerp(identityQuaternion, q, t);
+		printf("q\t%f %f %f %f	t=%i\n", qIn.getW(), qIn.getX(), qIn.getY(), qIn.getZ(), t);
+		r = quaternionToRotationMatrix(qIn);
+		matrixData = r;
 		
 
 		glutPostRedisplay();
@@ -1290,6 +1298,7 @@ void myGlutKeyboard(unsigned char Key, int x, int y)
 	case 13:
 		readEulerAngles(&e);
 		q = eulerAnglesToQuaternion(e);
+		printf("q\t%f %f %f %f	t=0\n", q.getW(), q.getX(), q.getY(), q.getZ());
 		isAnimate = 1;
 		animate(1);
 		glutPostRedisplay();
@@ -1389,7 +1398,7 @@ void glutWindowSystem(int argc, char* argv[]) {
 	setViewMatrix(0, 0, 10, 0, 0, 0);
 	setModelMatrix(0, 0, 0, 0, 0, 0);
 
-	main_window = glutCreateWindow("MVC to GLUI");
+	main_window = glutCreateWindow("Slerp Scene");
 	glutDisplayFunc(myGlutDisplay);
 	glutReshapeFunc(myGlutReshape);
 	glutKeyboardFunc(myGlutKeyboard);

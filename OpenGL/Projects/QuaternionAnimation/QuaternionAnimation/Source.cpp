@@ -149,7 +149,7 @@ private:
 // Routine to multiply two quaternions.
 Quaternion multiplyQuaternions(Quaternion q1, Quaternion q2)
 {
-	float w1, x1, y1, z1, w2, x2, y2, z2, w3, x3, y3, z3;
+	float w1, x1, y1, z1, w2, x2, y2, z2, w3, x3, y3, z3;	
 
 	w1 = q1.getW(); x1 = q1.getX(); y1 = q1.getY(); z1 = q1.getZ();
 	w2 = q2.getW(); x2 = q2.getX(); y2 = q2.getY(); z2 = q2.getZ();

@@ -89,11 +89,6 @@ Quaternion eulerAnglesToQuaternion(EulerAngles e)
 	q2 = new Quaternion(cos((PI / 180.0) * (beta / 2.0)), 0.0, sin((PI / 180.0) * (beta / 2.0)), 0.0);
 	q3 = new Quaternion(cos((PI / 180.0) * (gamma / 2.0)), 0.0, 0.0, sin((PI / 180.0) * (gamma / 2.0)));
 
-	printf("s\tq\t%f %f %f %f	0\n", q1->getW(), q1->getX(), q1->getY(), q1->getZ());
-	printf("s\tq\t%f %f %f %f	0\n", q2->getW(), q2->getX(), q2->getY(), q2->getZ());
-	printf("s\tq\t%f %f %f %f	0\n", q3->getW(), q3->getX(), q3->getY(), q3->getZ());
-	
-
 	return multiplyQuaternions(*q1, multiplyQuaternions(*q2, *q3));
 }
 

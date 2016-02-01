@@ -15,7 +15,6 @@ No callbacks are used.
 #include <string.h>
 #include "Libraries.h"
 #include "Matrices.h"
-#include "Quat.h"
 
 #include "teapot.h"             // 3D mesh of teapot
 #include "cameraSimple.h"       // 3D mesh of camera
@@ -26,13 +25,12 @@ Matrix4 matrixData; // Rotation matrix values.
 static float t = 0.0; // Interpolation parameter.
 static int isAnimate = 0; // Animated?
 static int animationPeriod = 100; // Time interval between frames.
-static Quat identityQuaternion,q;
 
 
-/** These are the live variables passed into GLUI ***/
-//int   wireframe = 0;
-//int   segments = 8;
-//int   main_window;
+								  /** These are the live variables passed into GLUI ***/
+								  //int   wireframe = 0;
+								  //int   segments = 8;
+								  //int   main_window;
 
 int window_width = 1368;
 int window_height = 768;
@@ -56,6 +54,8 @@ int   main_window;
 float scale = 1.0;
 int   show_sphere = 1;
 int   show_torus = 1;
+int nearPlane;
+int farPlane;
 
 // Using a std::string as a live variable is safe.
 std::string text = "Hello World!";
@@ -133,6 +133,27 @@ Matrix4 matrixProjection;
 //-----------------------------------Quaternions section-------------------------------------------------------
 
 #define PI 3.14159265
+
+// Quaternion class.
+class Quaternion
+{
+public:
+	Quaternion() { }
+	Quaternion(float wVal, float xVal, float yVal, float zVal)
+	{
+		w = wVal; x = xVal; y = yVal; z = zVal;
+	}
+	float getW() { return w; }
+	float getX() { return x; }
+	float getY() { return y; }
+	float getZ() { return z; }
+
+private:
+	float w, x, y, z;
+};
+
+static Quaternion identityQuaternion(1.0, 0.0, 0.0, 0.0), q; // Global identity quaternion.
+
 															 // Euler angles class.
 class EulerAngles
 {
@@ -152,6 +173,80 @@ private:
 
 static EulerAngles e; // Global Eular angle value.
 
+					  // Rotation matrix class.
+class RotationMatrix
+{
+public:
+	RotationMatrix() { }
+	RotationMatrix(float matrixDataVal[16])
+	{
+		for (int i = 0; i < 16; i++) matrixData[i] = matrixDataVal[i];
+	}
+	float getMatrixData(int i) { return matrixData[i]; }
+
+private:
+	float matrixData[16];
+};
+
+// Routine to multiply two quaternions.
+Quaternion multiplyQuaternions(Quaternion q1, Quaternion q2)
+{
+	float w1, x1, y1, z1, w2, x2, y2, z2, w3, x3, y3, z3;
+
+	w1 = q1.getW(); x1 = q1.getX(); y1 = q1.getY(); z1 = q1.getZ();
+	w2 = q2.getW(); x2 = q2.getX(); y2 = q2.getY(); z2 = q2.getZ();
+
+	w3 = w1*w2 - x1*x2 - y1*y2 - z1*z2;
+	x3 = w1*x2 + x1*w2 + y1*z2 - z1*y2;
+	y3 = w1*y2 + y1*w2 + z1*x2 - x1*z2;
+	z3 = w1*z2 + z1*w2 + x1*y2 - y1*x2;
+
+	return *new Quaternion(w3, x3, y3, z3);
+}
+
+// Routine to convert the Euler angle specifying a rotation to a quaternion. 
+Quaternion eulerAnglesToQuaternion(EulerAngles e)
+{
+	float alpha, beta, gamma;
+	Quaternion *q1, *q2, *q3;
+
+	alpha = e.getAlpha(); beta = e.getBeta(); gamma = e.getGamma();
+
+	q1 = new Quaternion(cos((PI / 180.0) * (alpha / 2.0)), sin((PI / 180.0) * (alpha / 2.0)), 0.0, 0.0);
+	q2 = new Quaternion(cos((PI / 180.0) * (beta / 2.0)), 0.0, sin((PI / 180.0) * (beta / 2.0)), 0.0);
+	q3 = new Quaternion(cos((PI / 180.0) * (gamma / 2.0)), 0.0, 0.0, sin((PI / 180.0) * (gamma / 2.0)));
+
+	return multiplyQuaternions(*q1, multiplyQuaternions(*q2, *q3));
+}
+
+// Routine to convert a quaternion specifying a rotation to a 4x4 rotation matrix in column-major order.
+Matrix4 quaternionToRotationMatrix(Quaternion q)
+{
+	float w, x, y, z;
+	float m[16];
+
+	w = q.getW(); x = q.getX(); y = q.getY(); z = q.getZ();
+
+	m[0] = w*w + x*x - y*y - z*z;
+	m[1] = 2.0*x*y + 2.0*w*z;
+	m[2] = 2.0*x*z - 2.0*y*w;
+	m[3] = 0.0;
+	m[4] = 2.0*x*y - 2.0*w*z;
+	m[5] = w*w - x*x + y*y - z*z;
+	m[6] = 2.0*y*z + 2.0*w*x;
+	m[7] = 0.0;
+	m[8] = 2.0*x*z + 2.0*w*y;
+	m[9] = 2.0*y*z - 2.0*w*x;
+	m[10] = w*w - x*x - y*y + z*z;
+	m[11] = 0.0;
+	m[12] = 0.0;
+	m[13] = 0.0;
+	m[14] = 0.0;
+	m[15] = 1.0;
+
+	return m;
+}
+
 // Read global Euler angle values to global EulerAngles object e.
 void readEulerAngles(EulerAngles *e)
 {
@@ -162,17 +257,18 @@ void readEulerAngles(EulerAngles *e)
 void writeMatrixData(Matrix4 r)
 {
 	//for (int i = 0; i < 16; i++)
-	 matrixData = r;
+	matrixData = r;
 }
 
 // Spherical linear interpolation between unit quaternions q1 and q2 with interpolation parameter t.
-Quat slerp(Quat q1, Quat q2, float t)
+Quaternion slerp(Quaternion q1, Quaternion q2, float t)
 {
 	float w1, x1, y1, z1, w2, x2, y2, z2, w3, x3, y3, z3;
+	Quaternion q2New;
 	float theta, mult1, mult2;
 
-	w1 = q1.W; x1 = q1.X; y1 = q1.Y; z1 = q1.Z;
-	w2 = q2.W; x2 = q2.X; y2 = q2.Y; z2 = q2.Z;
+	w1 = q1.getW(); x1 = q1.getX(); y1 = q1.getY(); z1 = q1.getZ();
+	w2 = q2.getW(); x2 = q2.getX(); y2 = q2.getY(); z2 = q2.getZ();
 
 	// Reverse the sign of q2 if q1.q2 < 0.
 	if (w1*w2 + x1*x2 + y1*y2 + z1*z2 < 0)
@@ -196,13 +292,12 @@ Quat slerp(Quat q1, Quat q2, float t)
 		mult2 = t;
 	}
 
-	Quat tmp;
-	tmp.W = mult1*w1 + mult2*w2;
-	tmp.X = mult1*x1 + mult2*x2;
-	tmp.Y = mult1*y1 + mult2*y2;
-	tmp.Z = mult1*z1 + mult2*z2;
+	w3 = mult1*w1 + mult2*w2;
+	x3 = mult1*x1 + mult2*x2;
+	y3 = mult1*y1 + mult2*y2;
+	z3 = mult1*z1 + mult2*z2;
 
-	return tmp;
+	return *new Quaternion(w3, x3, y3, z3);
 }
 
 //---------------------------------------------------------------------------------------------------------------
@@ -258,8 +353,8 @@ void init()
 {
 
 	// Initialize global matrixData.
-	for (int i = 0; i < 16; i++) matrixData[i] = 0.0;
-	matrixData[0] = matrixData[5] = matrixData[10] = matrixData[15] = 1.0;
+	/*	for (int i = 0; i < 16; i++) matrixData[i] = 0.0;
+	matrixData[0] = matrixData[5] = matrixData[10] = matrixData[15] = 1.0;*/
 
 	glShadeModel(GL_SMOOTH);                        // shading method: GL_SMOOTH or GL_FLAT
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);          // 4-byte pixel alignment
@@ -299,53 +394,53 @@ void init()
 ///////////////////////////////////////////////////////////////////////////////
 void setCamera(float posX, float posY, float posZ, float targetX, float targetY, float targetZ)
 {
-float forward[4];
-float up[4];
-float left[4];
-float position[4];
-float invLength;
+	float forward[4];
+	float up[4];
+	float left[4];
+	float position[4];
+	float invLength;
 
-// determine forward vector (direction reversed because it is camera)
-forward[0] = posX - targetX;    // x
-forward[1] = posY - targetY;    // y
-forward[2] = posZ - targetZ;    // z
-forward[3] = 0.0f;              // w
-// normalize it without w-component
-invLength = 1.0f / sqrtf(forward[0] * forward[0] + forward[1] * forward[1] + forward[2] * forward[2]);
-forward[0] *= invLength;
-forward[1] *= invLength;
-forward[2] *= invLength;
+	// determine forward vector (direction reversed because it is camera)
+	forward[0] = posX - targetX;    // x
+	forward[1] = posY - targetY;    // y
+	forward[2] = posZ - targetZ;    // z
+	forward[3] = 0.0f;              // w
+									// normalize it without w-component
+	invLength = 1.0f / sqrtf(forward[0] * forward[0] + forward[1] * forward[1] + forward[2] * forward[2]);
+	forward[0] *= invLength;
+	forward[1] *= invLength;
+	forward[2] *= invLength;
 
-// assume up direction is straight up
-up[0] = 0.0f;   // x
-up[1] = 1.0f;   // y
-up[2] = 0.0f;   // z
-up[3] = 0.0f;   // w
+	// assume up direction is straight up
+	up[0] = 0.0f;   // x
+	up[1] = 1.0f;   // y
+	up[2] = 0.0f;   // z
+	up[3] = 0.0f;   // w
 
-// compute left vector with cross product
-left[0] = up[1] * forward[2] - up[2] * forward[1];  // x
-left[1] = up[2] * forward[0] - up[0] * forward[2];  // y
-left[2] = up[0] * forward[1] - up[1] * forward[0];  // z
-left[3] = 1.0f;                                 // w
+					// compute left vector with cross product
+	left[0] = up[1] * forward[2] - up[2] * forward[1];  // x
+	left[1] = up[2] * forward[0] - up[0] * forward[2];  // y
+	left[2] = up[0] * forward[1] - up[1] * forward[0];  // z
+	left[3] = 1.0f;                                 // w
 
-// re-compute orthogonal up vector
-up[0] = forward[1] * left[2] - forward[2] * left[1];    // x
-up[1] = forward[2] * left[0] - forward[0] * left[2];    // y
-up[2] = forward[0] * left[1] - forward[1] * left[0];    // z
-up[3] = 0.0f;                                       // w
+													// re-compute orthogonal up vector
+	up[0] = forward[1] * left[2] - forward[2] * left[1];    // x
+	up[1] = forward[2] * left[0] - forward[0] * left[2];    // y
+	up[2] = forward[0] * left[1] - forward[1] * left[0];    // z
+	up[3] = 0.0f;                                       // w
 
-// camera position
-position[0] = -posX;
-position[1] = -posY;
-position[2] = -posZ;
-position[3] = 1.0f;
+														// camera position
+	position[0] = -posX;
+	position[1] = -posY;
+	position[2] = -posZ;
+	position[3] = 1.0f;
 
-// copy axis vectors to matrix
-matrixView.identity();
-matrixView.setColumn(0, left);
-matrixView.setColumn(1, up);
-matrixView.setColumn(2, forward);
-matrixView.setColumn(3, position);
+	// copy axis vectors to matrix
+	matrixView.identity();
+	matrixView.setColumn(0, left);
+	matrixView.setColumn(1, up);
+	matrixView.setColumn(2, forward);
+	matrixView.setColumn(3, position);
 }
 
 
@@ -950,10 +1045,10 @@ void drawSub2()
 	glRotatef(cameraAngle[1], 0, 1, 0);
 	glRotatef(cameraAngle[2], 0, 0, 1);
 	//live
-//	glRotatef(cameraModelAngleY, 1, 0, 0); // pitch
-//	glRotatef(cameraModelAngleX, 0, 1, 0);
-//----------------------------------------------------------
-	
+	//	glRotatef(cameraModelAngleY, 1, 0, 0); // pitch
+	//	glRotatef(cameraModelAngleX, 0, 1, 0);
+	//----------------------------------------------------------
+
 	glPushMatrix();
 	glTranslatef(-cameraPosition[0], -cameraPosition[1], -cameraPosition[2]);
 	glMultMatrixf(matrixData.get());
@@ -968,8 +1063,8 @@ void drawSub2()
 	glEnd();
 	glLineWidth(1.0);
 	glTranslatef(cameraPosition[0], cameraPosition[1], cameraPosition[2]);
-	
-//----------------------------------------------------------
+
+	//----------------------------------------------------------
 	drawCamera();
 	drawFrustum(FOV_Y, 1, 1, 10);
 	glPopMatrix();
@@ -980,7 +1075,7 @@ void drawSub2()
 	//Yangle = cameraAngle[1];
 	//Zangle = cameraAngle[2];
 	glTranslatef(-cameraPosition[0], -cameraPosition[1], -cameraPosition[2]);
-	
+
 	glRotatef(Xangle, 1.0, 0.0, 0.0);
 	glRotatef(Yangle, 0.0, 1.0, 0.0);
 	glRotatef(Zangle, 0.0, 0.0, 1.0);
@@ -1118,20 +1213,35 @@ void myGlutIdle(void)
 	glutPostRedisplay();
 }
 
+void quaternionToEuler(Quaternion q, EulerAngles* e)
+{
+	float w, x, y, z, alpha, beta, gamma;
+
+	w = q.getW();
+	x = q.getX();
+	y = q.getY();
+	z = q.getZ();
+
+	alpha = atan2(2 * (w*x + y*z), 1 - 2 * (x*x + y*y));
+	beta = asin(2 * (w*y - z*x));
+	gamma = atan2(2 * (w*z + x*y), 1 - 2 * (y*y + z*z));
+
+	*e = *new EulerAngles(Xangle, Yangle, Zangle);
+
+}
+
 void animate(int value)
 {
-	Quat qInterpolated;
+	Quaternion qInterpolated;
 	Matrix4 r;
-	//Quat identityQuaternion;
 
 	if (isAnimate)
 	{
 		if (t < 1.0) t += 0.04;
 		qInterpolated = slerp(identityQuaternion, q, t);
-		printf("qInt\t%f %f %f %f t=%i\n", q.W, q.X, q.Y, q.Z,t);
-		r = qInterpolated.getMatrix();
-		writeMatrixData(r);
-		
+		r = quaternionToRotationMatrix(qInterpolated);
+		matrixData = r;
+
 
 		glutPostRedisplay();
 		glutTimerFunc(animationPeriod, animate, 1);
@@ -1180,8 +1290,8 @@ void myGlutKeyboard(unsigned char Key, int x, int y)
 		glutPostRedisplay();
 		break;
 	case 13:
-		q=q.eulerAnglesToQuaternion(Vector3(Xangle, Yangle, Zangle));
-		printf("q\t%f %f %f %f	t=0\n", q.W, q.X, q.Y, q.Z);
+		readEulerAngles(&e);
+		q = eulerAnglesToQuaternion(e);
 		isAnimate = 1;
 		animate(1);
 		glutPostRedisplay();
@@ -1197,7 +1307,7 @@ void myGlutKeyboard(unsigned char Key, int x, int y)
 		break;
 	default:
 		break;
-	
+
 	};
 
 	glutPostRedisplay();
@@ -1281,7 +1391,7 @@ void glutWindowSystem(int argc, char* argv[]) {
 	setViewMatrix(0, 0, 10, 0, 0, 0);
 	setModelMatrix(0, 0, 0, 0, 0, 0);
 
-	main_window = glutCreateWindow("Our Quaternion Library");
+	main_window = glutCreateWindow("Slerp Scene");
 	glutDisplayFunc(myGlutDisplay);
 	glutReshapeFunc(myGlutReshape);
 	glutKeyboardFunc(myGlutKeyboard);
